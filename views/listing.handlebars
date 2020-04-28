@@ -1,0 +1,35 @@
+{{#each contents}}
+<div id=this.slug>
+<article id="article">    
+    <h2>{{this.title}}, <i>{{this.location}}</i></h2>
+    <h4>{{this.price}} - Last Updated {{this.time}}</h4>
+    <hr>
+    <div>
+        This listing has {{this.bedrooms}} bedrooms,
+        {{this.bathrooms}} bathrooms and the following
+        amenities:
+        {{this.amenities}}
+    </div>
+    <div>
+        <h4>Description: </h4>
+    </div>
+    <div>
+        {{this.description}}
+    </div>
+    <a href="/listing/{{this.slug}}/sendMail">Contact the landlord here!</a>
+    <h2>Reviews:</h2>
+    <a href="/listing/{{this.slug}}/writeReview">Write a review</a>
+    {{#each reviews}}
+        <div>
+            <h4>{{this.title}}, <b>{{this.name}}</b></h4>
+            <h5><i>{{this.rating}}/5.0 - </i>{{this.comment}}</h5>            
+        </div>
+    {{else}}
+        <h4>There are currently no reviews for this listing</h4>
+    {{/each}}
+</article>
+</div>
+<div id="NoMatches" style="display:none;"><h3>That search has no matches.</h3></div>
+{{else}}
+This listing does not exist.
+{{/each}}

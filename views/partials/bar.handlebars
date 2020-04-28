@@ -1,0 +1,67 @@
+<div>
+    <div class="nav">
+        <a href="/">Home</a>
+        <a href="/create">Create listing</a>
+        <a href="/chatRoom">Chat Room</a>
+        <a href="/listings/Manhattan">Manhattan</a>
+        <a href="/listings/Queens">Queens</a>
+        <a href="/listings/Brooklyn">Brooklyn</a>
+        <a href="/listings/Bronx">Bronx</a>
+        <a href="/listings/StatenIsland">Staten Island</a>      
+        <a href="/about">About</a>
+        <div class="search">
+          <input type="text" id="userInput" placeholder="Search for listings..."><button type="submit">Search </button>
+        </div>
+    </div>
+    {{#if tags}}
+    <div class="nav">
+      <div>
+        {{#each tags}}
+          <a href="/amenities/{{this}}">{{this}}</a>
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+</div>
+<br><hr>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
+<script src="../../data-util.js"></script>
+<script type="text/javascript">
+  
+  $("#userInput").on("input", function() {
+    var userInput = $("#userInput").val();        
+    var cleanInput = String(userInput).toUpperCase();    
+    $(document).ready(function () {
+      var count = 0;
+      $("div").each(function(){
+        var curr_text;
+        var div_id = $(this).attr("id");                
+        
+        $("h2").each(function(){
+          if(this.innerText.indexOf(div_id) == 0){
+            curr_text = this.innerText;
+          }
+        });
+
+        if(div_id && curr_text){          
+          clean_id = curr_text.toUpperCase();                  
+          if(clean_id.indexOf(cleanInput) > -1 && clean_id != "NOMATCHES"){
+            count += 1;
+            $(this).show();
+          } else{
+            $(this).hide();
+          }
+        }
+      });
+      
+      var hidden = document.getElementById("NoMatches");
+      if(count == 0){        
+        hidden.style.display = "block";
+      }else{        
+        hidden.style.display = "none";
+      }
+    });
+  });
+
+</script>

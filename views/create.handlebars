@@ -1,0 +1,33 @@
+<br>
+<h2>Add a listing!</h2>
+<article>
+    <form method="POST" action="/api/create">
+        <div class="input">
+            <label>Listing name: </label>
+            <input type="text" name="title" size="30" placeholder="ex. Beautiful 2 BR apartment">
+        </div>
+        <div class="input">
+            <label>Location: </label>
+            <input type="text" name="location" size="15" placeholder="ex. Manhattan">
+            <label>Monthly Price: </label>
+            <input type="text" name="price" size="8" placeholder="ex. $3,500">
+        </div>
+        <div class="input">
+            <label>Amenities: </label>
+            <input type="text" name="amenities" size="30" placeholder="ex. washer, dryer, pool">
+        </div>
+        <div class="input">
+            <label>Bedrooms: </label><input type="text" name="bedrooms" size="5" placeholder="ex. 2"><label>  Bathrooms:</label><input type="text" name="bathrooms" size="5" placeholder="ex. 1.5">
+        </div>
+        <div class="input">
+            <label>Url extension: </label><input type="text" name="slug" size="15" placeholder="ex. QueensListing">
+        </div>
+        <div class="input">
+            <label>Description:</label>            
+        </div>
+        <div class="input">
+            <textarea type="text" name="description" rows="10" size="30" placeholder="Add a description..."></textarea>
+        </div>
+        <button type="submit">Create Listing </button>
+    </form>
+</article>
