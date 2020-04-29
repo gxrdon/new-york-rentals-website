@@ -1,189 +1,143 @@
-# Midterm Project
-#### Out: 03/13/20 | Due: 04/10/20 11:59 PM | Deadline: 04/11/20 11:59 PM
+# NYC Apartments for Rent
 
-### Overview
+---
 
-In this project, you will tie together everything you have learned up to now in the semester.
+Name: Andrew Gordon
 
-The application you will build is a "crowdsourced data application".
+Date: 4/28/20
 
-You will utilze the technologies we learned (HTML, CSS, JS, Node.js, Express, and Handlebars) to create an API and front-end website with interactivity for your data.
+Project Topic: NYC Apartments
 
-### Objectives
+---
 
-The purpose of this project is to create a fully functioning **"crowdsourced data application"**.
+## Requirements
 
-First, you must select a topic for your project to be on. Example topics could be (you cannot use any of these for your project):
+### 1. Fulfillment of Midterm Project Requirements
+Midterm requirements have their own section at the bottom of this page. 
 
-- Local Dogs for Adoption
-- Movie Reviews
-- UMD Clubs and Activities
-- Rock Climbing Gyms
+2 Schemas:
+- `apartmentSchema`: Defines the fields that an apartment listing must have 
+- `reviewSchema`: Defines the fields that a review for an apartment must have
 
-Topics should ideally be people/places/things that can be crowdsourced by users of your application. Throught this project specification, we will use **Local Dog for Adoption** as an example.
 
-This project is largely open ended. The only requirement is to satisfy all parts of the `Specifications` section below, which are broad and flexible. Outside of that, you are free to be creative and make something you are proud of.
+### 2. Live Updates
+route: `/chatRoom`
+A chat box where users can communicate with one another, allowing them to ask questions, get advice from more experienced renters and even find a roommate.
 
-### Grading
+The page is generated using `chatroom.handlebars`.
 
-You fill submit both the application source as well as a `documentation.md` file that documents how you implemented each part of the project.
 
-Grading will be done using the `documentation.md` file to test your application.
+### 3. View Data
+Form submission:    `\create` and `\api\create`
 
-Each specificiation has two types of requirements:
-- (REQ): These are requirements **must** be followed. Failue to do so can result in up to 50% point deductions for the entire project.
-- (X pt): These specifications are worth X points.
+Chat room:          `\chatroom`
+Create listing:     `\create`
+Home page:          `\`
+Manhattan Listings: `\listings\manhattan` (and all the other boroughs have their respective listings page)
+Specific listing:   `\listing\:slug`
 
-### Setup
+About page:         `\about`
 
-There is a provided a shell that has all the dependencies you need set up. We have also included several libaries you will need in `package.json`. Clone the shell and run `npm install`.
 
-### Specifications
+### 4. API
+2 POST endpoints
+Write a review:   `/api/listing/writeReview`
+Create a listing: `/api/create`
 
+2 DELETE endpoints
+Delete oldest review: `/listing/:id/latestReview`
+Delete listing:       `/listing/:id`
 
-1. **Data Format and Storage**
+4 additional endpoints
+Raw data with all listings: `/api/allListingsRaw`
+About page:                 `/about`
+Create a new listing:       `/create`
+Page with selected listing: `/listing/:curr`
 
-    - (REQ) Data should be stored similar to how the Pokemon API and the blog engine was set up
-    - (5 pt) Each data entity should have at least 5 associated keys
-    - (5 pt) The data entity should have one of each String, Number, and Array type.
-       - Example a movie review can contain a numerical rating, a director, and an array of reviews.
-    
 
+### 5. Modules
+`./models/Apartments.js`
 
-2. **Add New Data**
 
-    Users will need to be able to add data to your local storage. Users will be able to add data in two ways:
+### 6. NPM Packages
+I used `nodemailer` and `moment`.
+nodemailer enabled me to create a contact form so that users can ask the landlord of the listing specific questions. I used this package in my `/sendMail` endpoint.
+I used moment to get the current time and format it how I wanted it when a user created a new listing. This gives the user a better idea of how long an apartment has been on the market.
 
-    - (10 pt) Submitting an HTML form. The form should have an input for each data  field.
-    - (10 pt) Sending a `POST` request to an API endpoint. The API endpoint must    take in entry for each data field.
 
-    In `documentation.md`, you will need to include:
-    - At which route the HTML form lives on the website
-    - At which route the `POST` API endpoint can be accessed.
-    - An example Node.js `POST` request using the `request` module to the API   endpoint.
+### 7. User Interface
+In my `main.css` file, you'll see that I made a bunch of classes to organize my html and make it look nicer. 
 
-    **`documentation.md` example**:
-    ```markdown
-    ### 2. Add New Data
 
-    HTML form route: `/addDog`
-    POST endpoint route: `/api/addDog`
+## Midterm Requirements
 
-    Example Node.js POST request to endpoint:
-    var request = require("request");
+### 1. Data Format and Storage
 
-    var options = {
-        method: 'POST',
-        url: 'http://localhost:3000/api/addDog',
-        headers: {
-            'content-type': 'application/x-www-form-urlencoded'
-        },
-        form: {
-            name: 'Cupcake',
-            breed: 'German Shepherd',
-            image: "http://i.imgur.com/iGLcfkN.jpg",
-            age: 10,
-            characteristics: ["Brown", "Black", "Sleepy", "Lazy"]
-        }
-    };
+Data point fields:
+- `title`:         ...       `Type: String`
+- `location`:      ...       `Type: String`
+- `price`:         ...       `Type: String`
+- `amenities`:     ...       `Type: Array`
+- `bedrooms`:      ...       `Type: Int`
+- `bathrooms`:     ...       `Type: Int`
+- `url extension`: ...       `Type: String`
+- `description`:   ...       `Type: String`
 
-    request(options, function (error, response, body) {
-      if (error) throw new Error(error);
 
-      console.log(body);
-    });
-    ```
+### 2. Add New Data
 
-3. **View Data**
+HTML form route: `/create`
+POST endpoint route: `/api/create`
 
-    Users should be able to view all data in two ways:
+Example Node.js POST request to endpoint: 
+var request = require("request");
 
-    - (REQ) The HTML pages should be generated using Handlebars
-    - (10 pt) At the home `/` route, you should display every data point in an  HTML Page.
-    - (10 pt) At another API `GET` endpoint, you should return all data points as   JSON.
+var options = {
+    method: 'POST',
+    url: 'http://localhost:3000/api/create',
+    headers: {
+        'content-type': 'application/x-www-form-urlencoded'
+    },
+    form: {
+        title: 'Manhattan Dream Apartment',
+        location: 'Manhattan, NY',
+        price: "$2,000",
+        amenities: "Pool, Sauna",
+        bedrooms: 2,
+	bathrooms: 1.5,
+  slug: ManhattanApt,
+	description: "The apartment you've been looking for. Located in the heart of the Financial District right by the 4, 5 and 6..."
+    }
+};
 
-    In `documentation.md`, you will need to include:
-    - The **route** for the API endpoint that returns all data.
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
 
+  console.log(body);
+});
 
-    **`documentation.md` example**:
-    ```markdown
-    ### 3. View Data
 
-    GET endpoint route: `/api/getDogs`
+### 3. View Data
 
-    ```
+Home GET endpoint: `/`
+JSON GET endpoint: `/api/allListingsRaw`
 
-4. **Search Data**
 
-    Also on the home page, you should implement an **auto-updating search feature** .
+### 4. Search Data
 
-    Select an appropriate field to run your searches on.
+Search Field: title and location
+In the example above, if we posted "Manhattan Dream Apartment, Manhattan, NY", it would continue to display upon typing "mANhaT" and then dissapear once we modified it to "mANhaTx".
+If we typed "Dream Apartment, Manhattan, NY", then the listing would be displayed. 
 
-    When the user first visits the home `/` page, they should see all data points.
 
-    - (15 pt) As the user types in the search bar, filter the results on the page   to those that match the search query. The results should be **auto-updating**. This means that for every keystroke, the results should be updated. The page should NOT refresh while typing and searching.
-    - (5 pt) If there is no match, then display text indicating that there are no   matches.
+### 5. Navigation Pages
 
-    Note: Feel free to use any NPM modules or JavaScript libraries to help you complete this task.
+The first 5 will give the user all of the postings in that borough and the sixth will give the user the newest posting. 
+1. Manhattan -> `/listings/Manhattan`
+2. Queens -> `/listings/Queens`
+3. Brooklyn -> `/listings/Brooklyn`
+4. Bronx -> `/listings/Bronx`
+5. Staten Island -> `/listings/StatenIsland`
+6. Newest Listing -> `/NewestListing`
 
-    **Example:**
-
-    I chose to implement search on Dog names. Suppose I have dogs `"nelson"`,  `"nelley"`, and `"noslen"`. As soon as I type `"Ne"` (without hitting enter), the  list should be filtered to only include `"nelson"` and `"nelley"`. If I type `"Nee"`, then I should see something like "There are no dogs with the name "Nee".
-
-    In `documentation.md`, you will need to include:
-    - Which field you chose to conduct the search on. If you pick a string field, please make sure it is case-insensitive.
-
-    **`documentation.md` example**:
-    ```markdown
-    ### 4. Search Data
-
-    Search Field: name
-
-    ```
-
-5. **Navigation Pages**
-
-    On the home `/` page, you should also have a **navigation bar**. This navigation bar will have **5 links**, and should be visible on every page.
-
-    The navigation bar links should filter your data in some way.
-
-    As an example, for the Dogs example, we could have:
-    - Heavy Dogs: Lists all dogs over 20.0 pounds
-    - Select a Breed: Displays a list of breeds that you can use to filter.
-    - Young Dog: Lists all dogs younger than 4 years old.
-    - Random Dog: Showcases a random dog.
-    - Alphabetical Dogs: Lists all dogs in alphabetical order by name.
-
-    (REQ) All additional pages must be rendered using handlebars.
-
-    (5 pt) 5 navigation bar links visible on each page (Hint: Use `main.handlebars`).
-
-    (15 pt) 5 pages linked to from the navigation bar that display the appropriate filtered data.
-
-    In `documentation.md`, you will need to include:
-    - Each of the 5 navigation filters
-    - The routes for each of the additional pages
-
-    **`documentation.md` example**:
-    ```markdown
-    ### 5. Navigation Pages
-
-    Navigation Filters
-    1. Heavy Dogs -> `/heaviest`
-    2. Select a Breed -> `/breed/:breed_name`
-    3. Young Dog -> `/youngest`
-    4. Random Dog -> `/random`
-    5. Alphabetical Dogs -> `/alphabetical`
-
-    ```
-
-### Submission
-There are two options for submitting this project:
-
-1. Deploying via Heroku [Heroku](http://heroku.com) to submit one link per project. (read `deployment.md` for tutorial)
-	* At the top of your project, include the **Heroku link** (ex: https://myapp.herokuapp.com) at the top of your `documentation.md` file, like so:
-	* Submit just the `documentation.md` file to the submit server.
-
-2. Submit a .zip file of your entire project directory.
-	* Please delete your `node_modules` directory in your project folder before submitting.      
+In addition to these, as postings are created, their amenities are added to the navigation bar and users can click those amenities to filter listings that have the desired amenity (ex. pool, sauna, etc.).
