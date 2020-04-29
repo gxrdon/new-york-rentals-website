@@ -18,7 +18,7 @@ var tags = [];
 var currSlug = "";
 var transport = nodemailer.createTransport({
   host: "smtp.mailtrap.io",
-  port: 2525,
+  port: process.env.PORT,
   auth: {
     user: "1a2b3c4d5e6f7g",
     pass: "1a2b3c4d5e6f7g"
@@ -231,6 +231,6 @@ app.post("/sendMail", function(req, res){
   res.redirect('/listing/' + currSlug);
 })
 
-/*http.listen(3000, function() {
+http.listen(process.env.PORT, function() {
     console.log('Listening on port 3000!');
-});*/
+});
