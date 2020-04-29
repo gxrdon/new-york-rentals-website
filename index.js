@@ -232,6 +232,6 @@ app.post("/sendMail", function(req, res){
   res.redirect('/listing/' + currSlug);
 })
 
-http.listen(process.env.PORT || 3000, host, function() {
+http.listen(process.env.PORT || 3000, function() {
     console.log('Listening...');
 });
