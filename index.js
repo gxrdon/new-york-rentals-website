@@ -1,3 +1,4 @@
+const host = '0.0.0.0';
 var express = require('express');
 var bodyParser = require('body-parser');
 var fs = require('fs');
@@ -231,6 +232,6 @@ app.post("/sendMail", function(req, res){
   res.redirect('/listing/' + currSlug);
 })
 
-http.listen(process.env.PORT || 3000, function() {
+http.listen(process.env.PORT || 3000, host, function() {
     console.log('Listening...');
 });
