@@ -56,12 +56,15 @@ function addTags(tag){
 
 app.get("/",function(req, res){
   var tag = getTags();
+  var data;
   Apartment.find({}).exec(function(err, apts){  
+    data = apts;
     if(err){
       console.log(err);
     }else{
+      console.log(data)
       res.render("home",{
-        data: apts,
+        data: data,
         tags: tag
       });
     }
