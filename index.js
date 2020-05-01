@@ -62,6 +62,7 @@ app.get("/",function(req, res){
     if(err){
       console.log(err);
     }else{
+      console.log("Making it here");
       console.log(data)
       res.render("home",{
         data: data,
