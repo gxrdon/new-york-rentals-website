@@ -2,10 +2,10 @@
 {{contents}}
 {{#each contents}}
     {{this}}
-    {{title}}
+    {{{title}}}
     <div id={{title}}>
     <article class="article">
-        <h2>{{this.title}}, <i>{{this.location}}</i></h2>
+        <h2>{{{title}}}, <i>{{this.location}}</i></h2>
         <h4>{{this.price}} - Last Updated {{this.time}}</h4>
         <hr>
         <div>        
