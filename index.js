@@ -62,7 +62,7 @@ app.get("/",function(req, res){
     if(err) throw err;
     res.render("home",{
       tags: tag,
-      contents: apts
+      contents: [apts]
     });
   });
 });
