@@ -61,10 +61,9 @@ app.get("/",function(req, res){
   query.exec(function(err, apts){    
     if(err) throw err;
     res.render("home",{
-      //tags: tag,
-      data: apts      
+      tags: tag,
+      contents: apts
     });
-    //res.send(apts);
   });
 });
 
