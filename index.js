@@ -60,11 +60,11 @@ app.get("/",function(req, res){
   
   query.exec(function(err, apts){    
     if(err) throw err;
-    /*res.render("home",{
-      tags: tag,
+    res.render("home",{
+      //tags: tag,
       data: apts      
-    });*/
-    res.send(apts);
+    });
+    //res.send(apts);
   });
 });
 
