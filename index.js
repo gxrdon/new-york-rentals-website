@@ -55,15 +55,15 @@ function addTags(tag){
 }
 
 app.get("/",function(req, res){
-  var tag = getTags();
-  var data;
-  Apartment.find({}).then(function(apts){  
-    data = apts;            
-  });
-  console.log(data)
-  res.render("home",{
-    data: data,
-    tags: tag
+  var tag = getTags();  
+  var query = Apartment.find({})
+  
+  query.exec(function(err, apts){    
+    if(err) throw err;
+    res.render("home",{
+      data: apts,
+      tags: tag
+    });
   });
 });
 
