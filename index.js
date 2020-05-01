@@ -102,8 +102,7 @@ app.get("/listing/:curr/writeReview", function(req, res){
 });
 
 app.post("/api/listing/writeReview", function(req, res){
-  Apartment.findOne({slug: currSlug}, function(err, apt){
-    if(err) throw err;
+  Apartment.findOne({slug: currSlug}).then(function(apt){    
     apt.reviews.push({
       rating: parseFloat(req.body.rating),
       title: req.body.title,
@@ -118,8 +117,7 @@ app.post("/api/listing/writeReview", function(req, res){
 });
 
 app.post("/listing/:id/addReview", function(req, res){
-  Apartment.findOne({_id: req.params.id}, function(err, apt){
-    if(err) throw err;
+  Apartment.findOne({_id: req.params.id}).then(function(apt){    
     if(!apt) res.send("That listing doesn't exist.")
 
     apt.reviews.push({
@@ -136,18 +134,14 @@ app.post("/listing/:id/addReview", function(req, res){
 });
 
 app.delete("/listing/:id", function(req, res){
-  Apartment.findByIdAndRemove(req.params.id, function(err, apt){
-    if (err) throw err;
-    
-    if (!apt) return res.send("No listing with that id exists.");
-    
+  Apartment.findByIdAndRemove(req.params.id, function(apt){        
+    if (!apt) return res.send("No listing with that id exists.");    
     res.send("Apartment listing was deleted successfully.")
   });
 });
 
 app.delete("/listing/:id/latestReview", function(req, res){
-  Apartment.findOne({_id: req.params.id}, function(err, apt){
-    if(err) throw err;
+  Apartment.findOne({_id: req.params.id}).then(function(apt){    
     if(!apt) res.send("That listing doesn't exist.")
     apt.reviews.pop();
     apt.save(function(err){
