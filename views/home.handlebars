@@ -2,7 +2,7 @@
 {{contents}}
 {{#each contents}}
     {{this}}
-    {{{title}}}
+    {{#each this}}
     <div id={{title}}>
     <article class="article">
         <h2>{{title}}, <i>{{location}}</i></h2>
@@ -21,6 +21,7 @@
         <a href="/listing/{{slug}}">Browse Reviews</a>
     </article>
     </div>
+    {{/each}}
 {{else}}
     <article>
         <h3>No listings are available yet.</h3>
