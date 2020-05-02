@@ -2,7 +2,9 @@
 {{contents}}
 {{#each contents}}      
 <div id={{title}}>
+{{this}}
 <article class="article">
+    {{this}}
     <h2>{{title}}, <i>{{location}}</i></h2>
     <h4>{{price}} - Last Updated {{time}}</h4>
     <hr>
@@ -19,5 +21,10 @@
     <a href="/listing/{{slug}}">Browse Reviews</a>
 </article>
 </div>    
+{{else}}
+    <article>
+        <h3>No listings are available yet.</h3>
+        <a href="/create">Be the first to post one here!</a>
+    </article>
 {{/each}}
 <div id="NoMatches" class="hidden"><h3>That search has no matches.</h3></div>
