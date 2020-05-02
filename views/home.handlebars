@@ -1,31 +1,23 @@
 <h2>Recent Listings:</h2>
 {{contents}}
-{{#each contents}}
-    {{this}}
-    {{#each this}}
-    <div id={{title}}>
-    <article class="article">
-        <h2>{{title}}, <i>{{location}}</i></h2>
-        <h4>{{price}} - Last Updated {{time}}</h4>
-        <hr>
-        <div>        
-            This listing has {{bedrooms}} bedroom(s),
-            {{bathrooms}} bathroom(s) and the following
-            amenities:
-            {{amenities}}
-        </div>
-        <div>
-            <h4>Description: </h4>
-            {{description}}
-        </div>
-        <a href="/listing/{{slug}}">Browse Reviews</a>
-    </article>
+{{#each contents}}      
+<div id={{title}}>
+<article class="article">
+    <h2>{{title}}, <i>{{location}}</i></h2>
+    <h4>{{price}} - Last Updated {{time}}</h4>
+    <hr>
+    <div>        
+        This listing has {{bedrooms}} bedroom(s),
+        {{bathrooms}} bathroom(s) and the following
+        amenities:
+        {{amenities}}
     </div>
-    {{/each}}
-{{else}}
-    <article>
-        <h3>No listings are available yet.</h3>
-        <a href="/create">Be the first to post one here!</a>
-    </article>
+    <div>
+        <h4>Description: </h4>
+        {{description}}
+    </div>
+    <a href="/listing/{{slug}}">Browse Reviews</a>
+</article>
+</div>    
 {{/each}}
 <div id="NoMatches" class="hidden"><h3>That search has no matches.</h3></div>
