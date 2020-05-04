@@ -62,7 +62,7 @@ app.get("/",function(req, res){
     if(err) throw err;
     res.render("home",{
       tags: tag,
-      contents: apts
+      data: apts
     });
   });
 });
@@ -189,10 +189,11 @@ app.get("/listings/:curr", function(req, res) {
   }else{
     curr = req.params.curr;
   }
-  Apartment.find({location: {"$regex": curr}}, function(err, apts){
-    if (err) throw err;    
+  var query = Apartment.find({location: {"$regex": curr}}); 
+  query.exec(function(err, apts){
+    if (err) throw err;
     res.render('home', {
-      data: apts
+      data: apts     
     });
   });
 });
