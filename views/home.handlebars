@@ -1,21 +1,21 @@
 <h2>Recent Listings:</h2>
 {{#each contents}}      
-<div id={{title}}>
+<div id={{this.title}}>
 <article class="article">    
-    <h2>{{{title}}}, {{{this.title}}}, {{title}}, {{this.title}} <i>{{location}}</i></h2>
-    <h4>{{price}} - Last Updated {{time}}</h4>
+    <h2>{{this.title}}, <i>{{this.location}}</i></h2>
+    <h4>{{this.price}} - Last Updated {{this.time}}</h4>
     <hr>
     <div>        
-        This listing has {{bedrooms}} bedroom(s),
-        {{bathrooms}} bathroom(s) and the following
+        This listing has {{this.bedrooms}} bedroom(s),
+        {{this.bathrooms}} bathroom(s) and the following
         amenities:
-        {{amenities}}
+        {{this.amenities}}
     </div>
     <div>
         <h4>Description: </h4>
-        {{description}}
+        {{this.description}}
     </div>
-    <a href="/listing/{{slug}}">Browse Reviews</a>
+    <a href="/listing/{{this.slug}}">Browse Reviews</a>
 </article>
 </div>    
 {{else}}
