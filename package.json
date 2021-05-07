@@ -18,7 +18,7 @@
         "mongoose": "^5.9.9",
         "nodemailer": "^6.4.6",
         "socket.io": "^2.3.0",
-        "underscore": "^1.10.2"
+        "underscore": "^1.12.1"
     },
     "engines": {
         "node": "13.8.0"
